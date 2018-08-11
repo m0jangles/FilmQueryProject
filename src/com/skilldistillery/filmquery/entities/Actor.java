@@ -8,9 +8,9 @@ public class Actor {
 	private String firstName;
 	private String lastName;
 	
-	public Actor(int id, String firstName, String lastName) {
+	public Actor(int actorId, String firstName, String lastName) {
 		super();
-		this.actorId = id;
+		this.actorId = actorId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
@@ -47,10 +47,13 @@ public class Actor {
 		this.lastName = lastName;
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "Actor:\t" + actorId + ", First Name:\t" + firstName + ", Last Name\t" + lastName;
+		return "Actor Id:" + actorId +"\n" + "First Name:\t" + firstName + "\n" + "Last Name:\t" + lastName + "\n";
 	}
+
 
 	@Override
 	public int hashCode() {
@@ -87,7 +90,7 @@ public class Actor {
 	}
 
 
-	public void setFilms(List<Actor> filmsByActorId) {
+	public void setFilms(List<Film> list) {
 		// TODO Auto-generated method stub
 		
 	}

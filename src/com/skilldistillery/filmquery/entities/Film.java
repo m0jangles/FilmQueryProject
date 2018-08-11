@@ -1,27 +1,25 @@
 package com.skilldistillery.filmquery.entities;
 
+import java.util.List;
 import java.util.Set;
 
-//Complete the Film class with attributes that map 
-//to the columns of the film table. Use appropriate 
-//datatypes and Java naming conventions. Provide getters 
-//and setters, and appropriate constructors. Also add a good 
-//toString, and equals and hashCode methods.
+
 public class Film {
 	private int filmId;
 	private String title;
 	private String desc;
-	private int releaseYear;
+	private short releaseYear;
 	private int langId;
 	private int rentDur;
 	private double rentalRate;
 	private int length;
 	private double repCost;
 	private String rating;
-	private Set features;
-	
-	public Film(int filmId, String title, String description, int releaseYear, int languageId, int rentalDuration,
-			double rentalRate, int length, double replacement_cost, String rating, Set specialFeatures) {
+	private String features;
+	private List<Actor> actors;
+
+	public Film(int filmId, String title, String desc, short releaseYear, int langId, int rentDur, double rentalRate,
+			int length, double repCost, String rating, String features) {
 		super();
 		this.filmId = filmId;
 		this.title = title;
@@ -34,8 +32,13 @@ public class Film {
 		this.repCost = repCost;
 		this.rating = rating;
 		this.features = features;
+		this.actors = actors;
 	}
-	
+
+	public Film() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getFilmId() {
 		return filmId;
 	}
@@ -47,15 +50,99 @@ public class Film {
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getDescription() {
+
+	public String getDesc() {
 		return desc;
 	}
-	public void setDescription(String desc) {
+
+	public void setDesc(String desc) {
 		this.desc = desc;
 	}
+
+	public int getReleaseYear() {
+		return releaseYear;
+	}
+
+	public void setReleaseYear(short releaseYear) {
+		this.releaseYear = releaseYear;
+	}
+
+	public int getLangId() {
+		return langId;
+	}
+
+	public void setLangId(int langId) {
+		this.langId = langId;
+	}
+
+	public int getRentDur() {
+		return rentDur;
+	}
+
+	public void setRentDur(int rentDur) {
+		this.rentDur = rentDur;
+	}
+
+	public double getRentalRate() {
+		return rentalRate;
+	}
+
+	public void setRentalRate(double rentalRate) {
+		this.rentalRate = rentalRate;
+	}
+
+	public int getLength() {
+		return length;
+	}
+
+	public void setLength(int length) {
+		this.length = length;
+	}
+
+	public double getRepCost() {
+		return repCost;
+	}
+
+	public void setRepCost(double repCost) {
+		this.repCost = repCost;
+	}
+
+	public String getRating() {
+		return rating;
+	}
+
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
+
+	public String getFeatures() {
+		return features;
+	}
+
+	public void setFeatures(String features) {
+		this.features = features;
+	}
+
+	public List<Actor> getActors() {
+		return actors;
+	}
+
+	public void setActors(List<Actor> actors) {
+		this.actors = actors;
+	}
+
+	@Override
+	public String toString() {
+		return "Film:\t" + filmId + "\n" + "Title:\t" + title + "\n" + "Description:\t" + desc + "\n" + "Release Year:\t" + releaseYear
+				+ "\n" +"Language Id:\t" + langId + "\n" + "Rental Duration:\t" + rentDur + "\n" + "Rental Rate:\t" + rentalRate + "\n" +
+				 "Length:\t" + length + "\n" + "Replacement Cost:\t" + repCost + "\n" + "Rating:\t" + rating
+				+ "\n" + "Special Features:\t" + features + "\n" + "Cast:\t" + "\n"+ actors;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -123,63 +210,4 @@ public class Film {
 		return true;
 	}
 
-	public int getReleaseYear() {
-		return releaseYear;
-	}
-	public void setReleaseYear(int releaseYear) {
-		this.releaseYear = releaseYear;
-	}
-	public int getLanguageId() {
-		return langId;
-	}
-	public void setLanguageId(int langId) {
-		this.langId = langId;
-	}
-	public int getRentalDuration() {
-		return rentDur;
-	}
-	public void setRentalDuration(int rentDur) {
-		this.rentDur = rentDur;
-	}
-	public double getRentalRate() {
-		return rentalRate;
-	}
-	public void setRentalRate(double rentalRate) {
-		this.rentalRate = rentalRate;
-	}
-	public int getLength() {
-		return length;
-	}
-	public void setLength(int length) {
-		this.length = length;
-	}
-	public double getReplacement_cost() {
-		return repCost;
-	}
-	public void setReplacement_cost(double replacement_cost) {
-		this.repCost = repCost;
-	}
-	public String getRating() {
-		return rating;
-	}
-	public void setRating(String rating) {
-		this.rating = rating;
-	}
-	public Set getSpecialFeatures() {
-		return features;
-	}
-	public void setSpecialFeatures(Set specialFeatures) {
-		this.features = features;
-	}
-	
-	@Override
-	public String toString() {
-		return "Film:\t" + filmId + ", Title:\t" + title + ", Description:\t" + desc + ", Release Year:\t" + releaseYear
-				+ ", Language Id:\t" + langId + ", Rental Duration:\t" + rentDur + ", Rental Rate:\t" + rentalRate
-				+ ", Length:\t" + length + ", Replacement Cost:\t" + repCost + ", Rating:\t" + rating
-				+ ", Special Features:\t" + features;
-	}
-	
-	
-	
 }
