@@ -19,8 +19,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		Film film = null;
 
 		Connection conn = DriverManager.getConnection(URL, user, pass);
-		String sql = "SELECT id, title, description, release_year, language_id, rental_duration,"
-				+ "rental_rate, length, replacement_cost, rating, special_features FROM film WHERE id = ?";
+		String sql = "SELECT film.id, film.title, film.description, film.release_year, film.language_id, film.rental_duration, "
+				+ "film.rental_rate, film.length, film.replacement_cost, film.rating, film.special_features, language.name FROM film "
+				+ "JOIN language ON film.language_id = language.id WHERE film.id = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, filmId);
 		ResultSet filmResult = stmt.executeQuery();
@@ -38,10 +39,13 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			film.setRepCost(filmResult.getDouble(9));
 			film.setRating(filmResult.getString(10));
 			film.setFeatures(filmResult.getString(11));
+			film.setLanguage(filmResult.getString(12));
 			film.setActors(getActorsByFilmId(filmId)); // An Actor has Films
 
 		}
-		// ...
+		filmResult.close();
+		stmt.close();
+		conn.close();
 		return film;
 	}
 
@@ -63,28 +67,31 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			actor.setLastName(actorResult.getString(3));
 			actor.setFilms(getFilmsByActorId(actorId)); // An Actor has Films
 		}
-		// ...
+		actorResult.close();
+		stmt.close();
+		conn.close();
 		return actor;
 	}
 
 	@Override
 	public List<Actor> getActorsByFilmId(int filmId) throws SQLException {
-		List<Actor> actors = new ArrayList<>();
-
+		List<Actor> actors = new ArrayList <> ();
+		Actor actor = null;
 		try {
-//			
+			
 			Connection conn = DriverManager.getConnection(URL, user, pass);
 			String sql = "SELECT actor.id, actor.first_name, actor.last_name FROM actor JOIN film_actor ON "
 					+ "film_actor.actor_id = actor.id WHERE film_actor.film_id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, filmId);
 			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
+			while(rs.next()) {
+
+				
 				int actorId = rs.getInt(1);
 				String firstName = rs.getString(2);
 				String lastName = rs.getString(3);
-
-				Actor actor = new Actor(actorId, firstName, lastName);
+				actor = new Actor(actorId, firstName, lastName);
 				actors.add(actor);
 			}
 			rs.close();
@@ -96,20 +103,18 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		return actors;
 	}
 
-	public Film getFilmByKeyword(String keyword) throws SQLException {
+	public List<Film> getFilmsByKeyword(String keyword) throws SQLException {
+
+		List<Film> films = new ArrayList <> ();
 		Film film = null;
-		
-		
 
 		Connection conn = DriverManager.getConnection(URL, user, pass);
-		String sql = "SELECT id, title, description, release_year, language_id, rental_duration,"
-				+ "rental_rate, length, replacement_cost, rating, special_features FROM film WHERE film.title LIKE ?";
-		
-		
+		String sql = "SELECT id, title, description, release_year, language_id, rental_duration, rental_rate, length, replacement_cost, rating, special_features FROM film WHERE title LIKE ?";
+
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setString(1, "%"+ keyword + "%");
+		stmt.setString(1, "%" + keyword + "%");
 		ResultSet filmResult = stmt.executeQuery();
-		if (filmResult.next()) {
+		while(filmResult.next()) {
 			film = new Film(); // Create the object
 			// Here is our mapping of query columns to our object fields:
 			film.setFilmId(filmResult.getInt(1));
@@ -124,10 +129,15 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			film.setRating(filmResult.getString(10));
 			film.setFeatures(filmResult.getString(11));
 			film.setActors(getActorsByFilmId(film.getFilmId())); // An Actor has Films
+			
+			
+			films.add(film);
 
 		}
-		// ...
-		return film;
+		filmResult.close();
+		stmt.close();
+		conn.close();
+		return films;
 	}
 
 	@Override
