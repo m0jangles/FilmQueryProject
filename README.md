@@ -23,7 +23,6 @@ arise at runtime"?  While I did use the debugger, the program was still compact 
 trace through it to find where things were going wrong.  I found many of the problems by trying to
 follow the path the way that Java would.  
 
-#### A few notes
 I was able to successfully use a try/catch for one of the user input blocks to try to catch bad input because,
 do users always enter good input?  These were the questions I asked throughout the project.  I find
 myself constantly asking these questions:
