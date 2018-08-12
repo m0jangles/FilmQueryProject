@@ -8,12 +8,12 @@ or they can choose to quit.
 If the user chooses to look up by ID, the user can enter a valid
 number which represents the ID; if a match is found, a title is returned, if a match is not found,
 the user will see a message about the result.
-####Look up by keyword
+#### Look up by keyword
 If the user chooses to look up by keyword, the user can enter a search term; if a match or
 matches are found, they will all be returned.  If no matches are found, the user will see a
 message about the result.
 
-####A few notes about the development process
+#### A few notes about the development process
 I met all of the required user stories relatively faster than I did with previous projects.
 I'm still not super quick about putting the pieces together but I found that I was able to follow
 the path of execution a lot easier because I have a better understanding of how classes work
@@ -23,7 +23,7 @@ arise at runtime"?  While I did use the debugger, the program was still compact 
 trace through it to find where things were going wrong.  I found many of the problems by trying to
 follow the path the way that Java would.  
 
-####A few notes
+#### A few notes
 I was able to successfully use a try/catch for one of the user input blocks to try to catch bad input because,
 do users always enter good input?  These were the questions I asked throughout the project.  I find
 myself constantly asking these questions:
