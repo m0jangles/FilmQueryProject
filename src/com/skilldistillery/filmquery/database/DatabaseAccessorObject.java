@@ -104,8 +104,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	}
 
 	public List<Film> getFilmsByKeyword(String keyword) throws SQLException {
-
 		List<Film> films = new ArrayList <> ();
+		
 		Film film = null;
 
 		Connection conn = DriverManager.getConnection(URL, user, pass);
@@ -114,6 +114,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, "%" + keyword + "%");
 		ResultSet filmResult = stmt.executeQuery();
+		
 		while(filmResult.next()) {
 			film = new Film(); // Create the object
 			// Here is our mapping of query columns to our object fields:
@@ -129,7 +130,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			film.setRating(filmResult.getString(10));
 			film.setFeatures(filmResult.getString(11));
 			film.setActors(getActorsByFilmId(film.getFilmId())); // An Actor has Films
-			
 			
 			films.add(film);
 

@@ -51,7 +51,7 @@ public class Actor {
 
 	@Override
 	public String toString() {
-		return "First Name:\t" + firstName + "\n" + "Last Name:\t" + lastName + "\n";
+		return String.format("Cast Member:\nFirst Name:\t" + firstName + "\n" + "Last Name:\t" + lastName + "\n");
 	}
 
 
